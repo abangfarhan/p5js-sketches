@@ -10,10 +10,10 @@ function setup() {
   noFill();
 
   slider_iter = createSlider(0, 14, 1);
-  slider_iter.position(5, 0);
+  slider_iter.position(10, 10);
 
   slider_angle = createSlider(90, 270, 90);
-  slider_angle.position(5, 20);
+  slider_angle.position(10, 35);
 }
 
 function draw() {
@@ -26,7 +26,6 @@ function draw() {
   // let max_iter = slider_iter.value();
   // let max_iter = map(sin(frameCount), -1, 1, 0, 14);
   let max_iter = map(frameCount%100, 0, 100, 0, 14);
-  //console.log(max_iter);
   for(let i=0; i < max_iter; i++) {
     let angle = slider_angle.value();
     for(let j=points.length - 1; j > 0; j--) {
@@ -40,27 +39,11 @@ function draw() {
   //   updatePoints();
 
   beginShape();
-  // for(let i=0; i < points.length; i++) {
   for(let pi of points) {
     vertex(pi[0], pi[1]);
   }
   endShape();
 }
-
-
-// function updatePoints() {
-//   let angle = slider_angle.value(); // (180 - slider_angle.value())/2;
-//   for(let i=points.length - 1; i > 0; i--) {
-//     let newP = newPoint(points[i], points[i-1], angle);
-//     points.splice(i, 0, newP);
-//     angle = angle * -1;
-//     
-//     // randomize the angle
-//     // let newP = newPoint(points[i], points[i-1],
-//     //   angle * ((random() > 0.5)? 1:-1));
-//     // points.splice(i, 0, newP);
-//   }
-// }
 
 function newPoint(p1, p2, angle) {
   distance = sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2);
@@ -79,20 +62,3 @@ function newPoint(p1, p2, angle) {
   p3[1] = p1[1] + newLength * sinAB;
   return p3;
 }
-
-// function newPoint(p1, p2, angle) {
-//   distance = sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2);
-//   let newLength = distance / sqrt(2);
-//   /* NOTE
-//    * sin(a + b) = sin(a)cos(b) + cos(a)sin(b)
-//    * cos(a + b) = cos(a)cos(b) - sin(a)sin(b)
-//    */
-//   sinB = (p2[1] - p1[1]) / distance;
-//   cosB = (p2[0] - p1[0]) / distance;
-//   sinAB = sin(angle) * cosB + cos(angle) * sinB;
-//   cosAB = cos(angle) * cosB - sin(angle) * sinB;
-//   let p3 = [];
-//   p3[0] = p1[0] + newLength * cosAB;
-//   p3[1] = p1[1] + newLength * sinAB;
-//   return p3;
-// }
