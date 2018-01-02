@@ -32,12 +32,12 @@ class Particle {
     }
   }
   startExplosion() {
-    let n_layers = 5;
-    let n_childs = 20;
+    // let n_layers = 5;
+    // let n_childs = 20;
     for (let i = 0; i < n_layers; i++) {
       for (let j = 0; j < n_childs; j++) {
         this.childs.push(new ParticleChild(this.x, this.y, 0.5 + 0.3*(i+1), j*360/n_childs));
-        this.childs[i*n_childs + j].start();
+        this.childs[i*n_childs + j].start(i);
       }
     }
   }
@@ -51,7 +51,8 @@ class Particle {
 }
 
 class ParticleChild extends Particle {
-  start() {
+  start(layer) {
+    this.layer = layer;
     this.startFrame = frameCount;
     this.visible = true;
   }
@@ -65,9 +66,11 @@ class ParticleChild extends Particle {
     let frameElapsed = frameCount - this.startFrame;
     let maxFrameElapsed = 100; // TODO use static property
     if (frameElapsed < maxFrameElapsed) {
-      let greenness = map(frameElapsed, 0, maxFrameElapsed, 0, 255);
+      let r = 255;
+      let g = 50; ///map(frameElapsed, 0, maxFrameElapsed, 0, 255);
+      let b = map(this.layer, 0, n_layers, 0, 255);
       let opacity = map(maxFrameElapsed-frameElapsed, 0, maxFrameElapsed, 0, 100);
-      stroke(255, greenness, 0, opacity);
+      stroke(r, g, b, opacity);
       point(this.x, this.y);
       if (opacity <= 10) {
         this.visible = false;

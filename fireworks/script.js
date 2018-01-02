@@ -4,6 +4,7 @@ let particles;
 let gravity;
 let stars;
 let n_stars;
+let n_layers, n_childs;
 
 function setup(){
 	createCanvas(1200, 600);
@@ -13,6 +14,8 @@ function setup(){
   gravity = [0, 0.05]; // createVector(0, 0.05);
   particles = [];
   n_particles = 10;
+  n_layers = 4;
+  n_childs = 20;
 
   let x = random(200, width-200);
   let angle = map(x, 200, width-200, -110, -70);
