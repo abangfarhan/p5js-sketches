@@ -6,13 +6,14 @@ var ysign = 1;
 var probThreshold = 0.5;
 
 function setup(){
-	createCanvas(500, 500);
+	let canvas = createCanvas(500, 500);
   background(0);
   stroke(255);
   x = 0;
   y = 0; //height/2;
   //colorMode(HSB);
 }
+
 
 function draw(){
   var ran = random();
