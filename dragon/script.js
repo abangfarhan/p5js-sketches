@@ -1,5 +1,4 @@
 let points;
-let slider_iter;
 let slider_angle;
 let max_iter_is_increasing = 1;
 
@@ -9,11 +8,8 @@ function setup() {
   strokeWeight(2);
   noFill();
 
-  slider_iter = createSlider(0, 14, 1);
-  slider_iter.position(10, 10);
-
   slider_angle = createSlider(90, 270, 90);
-  slider_angle.position(10, 35);
+  slider_angle.position(10, 15);
 }
 
 function draw() {
@@ -23,8 +19,6 @@ function draw() {
   points[0] = [100, 400];
   points[1] = [650, 400];
 
-  // let max_iter = slider_iter.value();
-  // let max_iter = map(sin(frameCount), -1, 1, 0, 14);
   let max_iter = map(frameCount%100, 0, 100, 0, 14);
   for(let i=0; i < max_iter; i++) {
     let angle = slider_angle.value();
@@ -34,9 +28,6 @@ function draw() {
       angle = angle * -1;
     }
   }
-
-  // for(let i=0; i < slider_iter.value(); i++)
-  //   updatePoints();
 
   beginShape();
   for(let pi of points) {
